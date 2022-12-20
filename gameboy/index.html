@@ -1,0 +1,88 @@
+<!doctype html><meta charset=utf-8>
+<head>
+  <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="icon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+<link rel="manifest" href="icon/manifest.json">
+<meta name="msapplication-TileColor" content="#00FFFFFF">
+<meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
+<meta name="theme-color" content="#00FFFFFF">
+</head>
+<style>
+#display{
+  width:480px; height:432px; display:block;
+  outline:3px solid #ccc; margin:5px auto;
+
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+
+#io,#stack{float:left;height:400px;overflow-y:scroll}
+#out{float:left;margin-right:10px}
+#dbg{display:none}
+
+</style>
+<div id=dbg>
+<pre id=out></pre>
+<pre id=io></pre>
+<pre id=stack></pre>
+
+<button onclick="cpu(); debugData(); return false">CPU Step</button>
+<button onclick="requestStop ? run() : (requestStop=true); return false">Stop / Frame</button>
+<button onclick="runto();return false">Run To...</button>
+</div>
+
+<canvas id=display
+  width=160 height=144
+  onclick="runto(0x10000);"
+  ondblclick="fullScreen(this)"
+></canvas>
+
+
+
+<div style='width:480px;margin:auto'>
+
+<input type='file' accept='.gb,.gbc' id=fileinput onchange='openFile(event)'>
+<body>
+
+<button onclick='requestStop? runto(0x10000) : requestStop=true'>Run/Stop</button>
+<button onclick="window.location.reload()">Close Game</button>
+<div style='display:inline-block;vertical-align:middle'>
+</div>
+
+
+<br><br>
+
+
+<a href='#' onclick='saveSram(this);'>save .sav file</a>  
+<input type='file' id=loadsav style='display:none' accept='.sav' onchange='loadSram(event)'>
+
+<br><br>
+Controls:<br>
+arrow keys (up, down, left, right)<br>
+S (A)<br>
+A (b)<br>
+Enter (start)<br>
+Shift (select)<br>
+Doubleclick for fullscreen<br>
+
+<a href=# onclick='gamepad.config();return false'>Configure Gamepad</a>
+<span id=gamepadText></span>
+</div>
+</body>
+<script src="./script.js"></script>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://random-code-tests.neocities.org/gb-emulator/test2/clearGame.js"></script>

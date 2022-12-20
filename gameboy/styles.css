@@ -1,0 +1,22 @@
+body{
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+.title {
+	color: #white;
+}
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+a:active {
+  color: white;
